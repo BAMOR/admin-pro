@@ -1,0 +1,790 @@
+================================================================================
+                    SISTEMA DE COMERCIO ELECTRÓNICO "MI TORTUGA"
+                         TRABAJO ESCRITO DEL PROYECTO
+================================================================================
+
+TABLA DE CONTENIDOS
+-------------------
+1. Introducción
+2. Objetivos del Proyecto
+3. Descripción del Sistema
+4. Arquitectura y Tecnologías Utilizadas
+5. Módulos y Funcionalidades
+6. Base de Datos
+7. Manual de Usuario
+8. Conclusiones
+9. Recomendaciones
+10. Bibliografía
+
+================================================================================
+1. INTRODUCCIÓN
+================================================================================
+
+En la era digital actual, el comercio electrónico se ha convertido en una 
+herramienta fundamental para las empresas que buscan expandir su alcance y 
+ofrecer servicios de venta en línea. El presente proyecto, denominado "Mi 
+Tortuga", es un sistema de comercio electrónico desarrollado con tecnologías 
+web modernas que permite a los usuarios realizar compras en línea de manera 
+segura y eficiente.
+
+El sistema está diseñado para ofrecer una experiencia completa tanto para 
+clientes como para administradores, incluyendo funcionalidades como gestión 
+de inventario, procesamiento de pedidos, seguimiento de envíos, sistema de 
+reseñas, chat en vivo y generación de reportes.
+
+================================================================================
+2. OBJETIVOS DEL PROYECTO
+================================================================================
+
+OBJETIVO GENERAL:
+-----------------
+Desarrollar una plataforma de comercio electrónico funcional que permita a 
+los usuarios adquirir productos en línea y a los administradores gestionar 
+eficientemente el inventario, ventas y clientes.
+
+OBJETIVOS ESPECÍFICOS:
+----------------------
+• Implementar un sistema de autenticación seguro con roles diferenciados
+  (administrador y cliente)
+
+• Crear un catálogo de productos con filtros de búsqueda avanzados
+
+• Desarrollar un carrito de compras con gestión de cantidades y cálculo 
+  automático de totales
+
+• Integrar un proceso de checkout con múltiples métodos de pago y envío
+
+• Implementar un sistema de seguimiento de pedidos en tiempo real
+
+• Desarrollar un panel administrativo para gestión de inventario, ventas 
+  y usuarios
+
+• Incorporar un sistema de reseñas y calificaciones de productos
+
+• Implementar un chat en vivo para atención al cliente
+
+• Generar facturas en formato PDF automáticamente
+
+• Crear reportes de ventas con gráficos estadísticos
+
+================================================================================
+3. DESCRIPCIÓN DEL SISTEMA
+================================================================================
+
+"Mi Tortuga" es una aplicación web de comercio electrónico que conecta a 
+vendedores con compradores a través de una interfaz intuitiva y moderna. 
+El sistema cuenta con dos tipos de usuarios principales:
+
+USUARIOS CLIENTES:
+------------------
+Los clientes pueden navegar por el catálogo de productos, realizar búsquedas 
+filtradas, agregar productos al carrito, completar compras, dejar reseñas, 
+chatear con soporte y dar seguimiento a sus pedidos.
+
+USUARIOS ADMINISTRADORES:
+-------------------------
+Los administradores tienen acceso a un panel de control donde pueden gestionar 
+el inventario de productos, procesar ventas, administrar usuarios, responder 
+consultas del chat y generar reportes de rendimiento del negocio.
+
+CARACTERÍSTICAS PRINCIPALES:
+----------------------------
+• Diseño responsivo con interfaz moderna y elegante
+• Sistema de autenticación con encriptación de contraseñas
+• Carrito de compras persistente por sesión
+• Múltiples métodos de pago (tarjeta, PayPal, transferencia)
+• Opciones de envío (estándar y express)
+• Notificaciones de stock bajo para administradores
+• Alertas visuales con SweetAlert2
+• Exportación de documentos en PDF
+
+================================================================================
+4. ARQUITECTURA Y TECNOLOGÍAS UTILIZADAS
+================================================================================
+
+ARQUITECTURA DEL SISTEMA:
+-------------------------
+El proyecto sigue una arquitectura MVC (Modelo-Vista-Controlador) simplificada,
+donde:
+
+• MODELO: Representado por las clases y funciones que interactúan con la base
+  de datos (config/database.php)
+
+• VISTA: Los archivos PHP que generan el HTML enviado al navegador
+  (index.php, admin.php, etc.)
+
+• CONTROLADOR: La lógica de negocio implementada en los mismos archivos PHP
+  que procesan las solicitudes del usuario
+
+TECNOLOGÍAS DEL LADO DEL SERVIDOR:
+----------------------------------
+• PHP 8.2: Lenguaje principal de programación
+• PDO (PHP Data Objects): Para conexión segura a base de datos
+• MySQL/MariaDB: Sistema de gestión de base de datos
+• TCPDF: Librería para generación de documentos PDF
+• Composer: Gestor de dependencias de PHP
+
+TECNOLOGÍAS DEL LADO DEL CLIENTE:
+---------------------------------
+• HTML5: Estructura semántica de las páginas
+• CSS3: Estilos con diseño moderno y animaciones
+• JavaScript: Interactividad del lado del cliente
+• SweetAlert2: Librería para alertas elegantes
+• Chart.js: Librería para gráficos estadísticos
+• Google Fonts: Tipografías Playfair Display y Poppins
+
+SERVIDOR WEB:
+-------------
+• Apache o Nginx (recomendado XAMPP para desarrollo local)
+
+================================================================================
+5. MÓDULOS Y FUNCIONALIDADES
+================================================================================
+
+MÓDULO DE AUTENTICACIÓN:
+------------------------
+Archivos: login.php, register.php, login_process.php, register_process.php
+
+Funcionalidades:
+• Registro de nuevos usuarios con validación de datos
+• Inicio de sesión con email y contraseña
+• Encriptación de contraseñas usando password_hash() de PHP
+• Gestión de sesiones con $_SESSION
+• Redirección según el rol del usuario (admin/cliente)
+• Cierre de sesión seguro
+
+MÓDULO DE TIENDA (CLIENTE):
+---------------------------
+Archivo principal: index.php
+
+Funcionalidades:
+• Visualización de productos en cuadrícula
+• Búsqueda por nombre de producto
+• Filtros por categoría, rango de precios y popularidad
+• Mostrar reseñas y calificaciones de cada producto
+• Agregar productos al carrito desde la tienda
+• Formulario para dejar reseñas con calificación de 1 a 5 estrellas
+
+MÓDULO DE CARRITO:
+------------------
+Archivo: carrito.php
+
+Funcionalidades:
+• Visualización de productos agregados al carrito
+• Modificación de cantidades de productos
+• Cálculo automático de subtotales y total general
+• Eliminación de productos del carrito
+• Validación de carrito vacío
+• Botón para proceder al checkout
+
+MÓDULO DE CHECKOUT:
+-------------------
+Archivo: checkout.php
+
+Funcionalidades:
+• Resumen detallado de la compra
+• Selección de método de envío (gratis o express)
+• Selección de método de pago (tarjeta, PayPal, transferencia)
+• Procesamiento de compra con actualización de stock
+• Generación automática de factura PDF
+• Confirmación de compra con mensaje de éxito
+
+MÓDULO DE PERFIL DE USUARIO:
+----------------------------
+Archivo: perfil.php
+
+Funcionalidades:
+• Visualización y edición de datos personales
+• Historial completo de compras
+• Seguimiento de pedidos con estados visuales
+• Estados del pedido: Confirmado → En empaque → En transporte → 
+  En camino → Entregado
+
+MÓDULO DE INVENTARIO (ADMIN):
+-----------------------------
+Archivo: inventario.php
+
+Funcionalidades:
+• Listado completo de productos con imagen, precio y stock
+• Formulario para agregar nuevos productos
+• Edición de productos existentes
+• Eliminación de productos con confirmación
+• Subida de imágenes con renombrado automático
+• Validación de tipos de archivo de imagen
+• Eliminación automática de imágenes al borrar productos
+
+MÓDULO DE VENTAS (ADMIN):
+-------------------------
+Archivo: ventas.php
+
+Funcionalidades:
+• Historial completo de todas las ventas
+• Visualización de datos del cliente por venta
+• Actualización del estado de cada pedido
+• Información de método de pago y envío
+• Fechas de realización de compras
+
+MÓDULO DE USUARIOS (ADMIN):
+---------------------------
+Archivo: usuarios.php
+
+Funcionalidades:
+• Listado de todos los usuarios registrados
+• Cambio de rol entre cliente y administrador
+• Eliminación de usuarios (con protección para admins)
+• Visualización de fecha de registro
+• Cascada de eliminación de datos relacionados
+
+MÓDULO DE CHAT:
+---------------
+Archivos: chat.php (cliente), admin_chat.php (admin)
+
+Funcionalidades:
+• Chat en tiempo real entre clientes y administradores
+• Mensajes con identificación de remitente
+• Timestamp de envío de mensajes
+• Interfaz diferenciada para clientes y admins
+• Historial de conversaciones visible
+
+MÓDULO DE REPORTES (ADMIN):
+---------------------------
+Archivo: reportes.php
+
+Funcionalidades:
+• Métricas generales (total de ventas, ingresos totales)
+• Reporte de ventas agrupadas por fecha
+• Top 5 de clientes con más compras
+• Gráficos visuales con Chart.js
+• Exportación de reportes a PDF
+
+MÓDULO DE GENERACIÓN DE PDF:
+----------------------------
+Archivos: generar_factura.php, exportar_pdf.php
+
+Funcionalidades:
+• Generación de facturas de compra en PDF
+• Inclusión de datos del cliente y productos
+• Descarga automática al confirmar compra
+• Exportación de reportes de ventas para admin
+• Formato profesional con tablas y estilos
+
+MÓDULO DE PREGUNTAS FRECUENTES:
+-------------------------------
+Archivo: faq.php
+
+Contenido:
+• Guía de cómo realizar una compra
+• Información sobre tiempos de envío
+• Política de cancelación de pedidos
+• Métodos de pago aceptados
+• Información sobre garantía de productos
+
+================================================================================
+6. BASE DE DATOS
+================================================================================
+
+SISTEMA GESTOR: MySQL / MariaDB
+NOMBRE DE LA BASE DE DATOS: sistema_compras
+
+TABLAS IMPLEMENTADAS:
+---------------------
+
+1. TABLA: usuarios
+   Propósito: Almacenar información de los usuarios del sistema
+   
+   Campos:
+   - id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   - nombre (VARCHAR(100), NOT NULL)
+   - email (VARCHAR(100), NOT NULL, UNIQUE)
+   - password (VARCHAR(255), NOT NULL)
+   - rol (ENUM('admin','cliente'), DEFAULT 'cliente')
+   - creado (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+2. TABLA: productos
+   Propósito: Almacenar el catálogo de productos disponibles
+   
+   Campos:
+   - id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   - nombre (VARCHAR(150), NOT NULL)
+   - descripcion (TEXT)
+   - precio (DECIMAL(10,2), NOT NULL)
+   - stock (INT, DEFAULT 0)
+   - categoria (VARCHAR(100))
+   - imagen (VARCHAR(255), DEFAULT 'default.png')
+   - creado (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+3. TABLA: ventas
+   Propósito: Registrar todas las transacciones de compra
+   
+   Campos:
+   - id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   - usuario_id (INT, FOREIGN KEY REFERENCES usuarios(id))
+   - total (DECIMAL(10,2), NOT NULL)
+   - metodo_pago (VARCHAR(50), NOT NULL)
+   - metodo_envio (VARCHAR(50), NOT NULL)
+   - estado (ENUM con 5 estados, DEFAULT 'Confirmado')
+   - fecha (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+4. TABLA: reseñas
+   Propósito: Almacenar opiniones y calificaciones de productos
+   
+   Campos:
+   - id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   - producto_id (INT, FOREIGN KEY REFERENCES productos(id))
+   - usuario_id (INT, FOREIGN KEY REFERENCES usuarios(id))
+   - comentario (TEXT, NOT NULL)
+   - calificacion (INT, CHECK entre 1 y 5)
+   - fecha (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+5. TABLA: chat
+   Propósito: Guardar mensajes del chat de soporte
+   
+   Campos:
+   - id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   - usuario_id (INT, FOREIGN KEY REFERENCES usuarios(id))
+   - mensaje (TEXT, NOT NULL)
+   - enviado (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+RELACIONES ENTRE TABLAS:
+------------------------
+• usuarios → ventas (1:N) - Un usuario puede tener múltiples ventas
+• usuarios → reseñas (1:N) - Un usuario puede dejar múltiples reseñas
+• usuarios → chat (1:N) - Un usuario puede enviar múltiples mensajes
+• productos → reseñas (1:N) - Un producto puede tener múltiples reseñas
+• Las eliminaciones en cascada están configuradas para mantener la 
+  integridad referencial
+
+ÍNDICES:
+--------
+• Primary Keys en todas las tablas para identificación única
+• Unique Key en email de usuarios para evitar duplicados
+• Foreign Keys con índices automáticos para optimizar JOINs
+
+================================================================================
+7. MANUAL DE USUARIO
+================================================================================
+
+PARA CLIENTES:
+--------------
+
+1. REGISTRO:
+   - Acceder a register.php
+   - Completar nombre, email y contraseña
+   - Hacer clic en "Registrarse"
+   - Serás redirigido al login automáticamente
+
+2. INICIO DE SESIÓN:
+   - Acceder a login.php
+   - Ingresar email y contraseña
+   - Hacer clic en "Entrar"
+
+3. COMPRAR PRODUCTOS:
+   a) Navegar por la tienda (index.php):
+      - Ver todos los productos disponibles
+      - Usar filtros para buscar productos específicos
+      - Leer reseñas de otros clientes
+   
+   b) Agregar al carrito:
+      - Hacer clic en "Agregar al carrito" en el producto deseado
+      - El producto se guarda en tu carrito de compras
+   
+   c) Ver carrito:
+      - Acceder a carrito.php
+      - Modificar cantidades si es necesario
+      - Eliminar productos no deseados
+      - Ver el total a pagar
+   
+   d) Checkout:
+      - Hacer clic en "Proceder al pago"
+      - Seleccionar método de envío
+      - Seleccionar método de pago
+      - Confirmar la compra
+      - Descargar factura PDF automáticamente
+
+4. SEGUIMIENTO DE PEDIDOS:
+   - Acceder a perfil.php
+   - Ver historial de compras
+   - Hacer clic en "Rastrear" para ver el estado del pedido
+   - Los estados van desde "Confirmado" hasta "Entregado"
+
+5. DEJAR RESEÑAS:
+   - En index.php, buscar el producto comprado
+   - Completar el formulario de reseña
+   - Escribir comentario y seleccionar calificación (1-5 estrellas)
+   - Enviar reseña
+
+6. CHAT DE SOPORTE:
+   - Acceder a chat.php
+   - Escribir mensaje en el área de texto
+   - Hacer clic en "Enviar"
+   - Esperar respuesta del administrador
+
+PARA ADMINISTRADORES:
+---------------------
+
+1. ACCESO AL PANEL:
+   - Iniciar sesión con credenciales de administrador
+   - Serás redirigido automáticamente a admin.php
+
+2. GESTIONAR INVENTARIO:
+   a) Agregar producto:
+      - Ir a inventario.php
+      - Completar formulario con nombre, descripción, precio, stock, 
+        categoría e imagen
+      - Hacer clic en "Agregar Producto"
+   
+   b) Editar producto:
+      - Hacer clic en "Editar" en el producto deseado
+      - Modificar los campos necesarios
+      - Hacer clic en "Actualizar Producto"
+   
+   c) Eliminar producto:
+      - Hacer clic en "Eliminar"
+      - Confirmar la acción en la alerta emergente
+
+3. GESTIONAR VENTAS:
+   - Acceder a ventas.php
+   - Ver listado de todas las ventas realizadas
+   - Cambiar el estado de un pedido usando el selector
+   - Hacer clic en "Actualizar" para guardar el cambio
+
+4. GESTIONAR USUARIOS:
+   - Acceder a usuarios.php
+   - Ver lista de todos los usuarios
+   - Cambiar rol de usuario usando el selector desplegable
+   - Eliminar usuarios (excepto administradores)
+
+5. ATENDER CHAT:
+   - Acceder a admin_chat.php
+   - Leer mensajes de los clientes
+   - Responder escribiendo en el área de texto
+   - Hacer clic en "Enviar como Admin"
+
+6. VER REPORTES:
+   - Acceder a reportes.php
+   - Ver métricas generales de ventas
+   - Consultar ventas por fecha
+   - Ver top clientes
+   - Exportar reporte a PDF
+
+7. ALERTAS DE STOCK:
+   - En admin.php se muestran automáticamente alertas de productos
+     con stock menor a 5 unidades
+   - Reponer inventory accediendo a inventario.php
+
+================================================================================
+8. CONCLUSIONES
+================================================================================
+
+El desarrollo del sistema de comercio electrónico "Mi Tortuga" ha permitido 
+implementar una plataforma funcional y completa que cubre las necesidades 
+básicas de una tienda en línea. A lo largo del proyecto se lograron los 
+siguientes aspectos destacados:
+
+ASPECTOS POSITIVOS:
+-------------------
+1. INTERFAZ MODERNA: El diseño implementado con CSS3 ofrece una experiencia
+   visual atractiva y profesional, con animaciones suaves y una paleta de
+   colores elegante basada en tonos dorados y oscuros.
+
+2. FUNCIONALIDAD COMPLETA: El sistema cuenta con todas las características
+   esenciales de un e-commerce: catálogo, carrito, checkout, pagos, envíos,
+   seguimiento y soporte.
+
+3. SEGURIDAD: Se implementaron prácticas de seguridad básicas como:
+   - Encriptación de contraseñas con password_hash()
+   - Uso de sentencias preparadas para prevenir SQL Injection
+   - Validación de sesiones para proteger rutas
+   - Validación de archivos subidos
+
+4. EXPERIENCIA DE USUARIO: Elementos como alertas SweetAlert2, confirmaciones
+   de acciones, notificaciones de éxito y navegación intuitiva mejoran la
+   experiencia del usuario.
+
+5. GESTIÓN ADMINISTRATIVA: El panel de administración proporciona herramientas
+   completas para gestionar todos los aspectos del negocio sin necesidad de
+   conocimientos técnicos avanzados.
+
+6. DOCUMENTACIÓN AUTOMÁTICA: La generación de facturas y reportes en PDF
+   facilita la documentación de transacciones y el análisis del negocio.
+
+ÁREAS DE MEJORA IDENTIFICADAS:
+------------------------------
+1. VALIDACIÓN DE FORMULARIOS: Se podría implementar validación más robusta
+   del lado del cliente con JavaScript antes de enviar formularios.
+
+2. PAGOS REALES: Actualmente los métodos de pago son simulados. Se podría
+   integrar APIs reales como Stripe, PayPal o MercadoPago.
+
+3. SISTEMA DE NOTIFICACIONES: Implementar notificaciones por email para
+   confirmación de compras y cambios de estado de pedidos.
+
+4. BÚSQUEDA AVANZADA: Mejorar el sistema de búsqueda con algoritmos más
+   sofisticados y sugerencias automáticas.
+
+5. OPTIMIZACIÓN DE IMÁGENES: Implementar compresión y redimensionamiento
+   automático de imágenes subidas.
+
+6. BACKUP AUTOMÁTICO: Crear un sistema de backup automático de la base de
+   datos.
+
+7. MULTI-IDIOMA: Agregar soporte para múltiples idiomas para alcanzar un
+   público más amplio.
+
+================================================================================
+9. RECOMENDACIONES
+================================================================================
+
+PARA FUTUROS DESARROLLOS:
+-------------------------
+
+1. IMPLEMENTAR API REST: Crear una API RESTful para permitir la integración
+   con aplicaciones móviles y otros sistemas externos.
+
+2. AGREGAR CARRITO PERSISTENTE: Usar la base de datos para almacenar el
+   carrito de compras y que persista entre sesiones y dispositivos.
+
+3. SISTEMA DE DESCUENTOS: Implementar cupones de descuento y promociones
+   especiales.
+
+4. INTEGRACIÓN CON REDES SOCIALES: Permitir inicio de sesión con Facebook,
+   Google y compartir productos en redes sociales.
+
+5. SISTEMA DE RECOMENDACIÓN: Implementar algoritmos de recomendación basados
+   en el historial de compras y navegación del usuario.
+
+6. MODO OSCURO: Agregar la opción de cambiar entre modo claro y oscuro para
+   mejorar la accesibilidad.
+
+7. OPTIMIZACIÓN SEO: Mejorar el posicionamiento en buscadores con meta tags,
+   URLs amigables y sitemap.
+
+8. ANALYTICS: Integrar Google Analytics para tracking de comportamiento de
+   usuarios.
+
+9. CDN PARA IMÁGENES: Usar un Content Delivery Network para mejorar la carga
+   de imágenes en diferentes regiones geográficas.
+
+10. TESTING AUTOMATIZADO: Implementar pruebas unitarias y de integración
+    para asegurar la calidad del código.
+
+PARA EL DESPLIEGUE EN PRODUCCIÓN:
+---------------------------------
+
+1. Usar HTTPS con certificado SSL válido
+2. Configurar correctamente los permisos de archivos
+3. Usar variables de entorno para datos sensibles
+4. Implementar sistema de logging de errores
+5. Configurar backup automático de base de datos
+6. Usar caché para mejorar el rendimiento
+7. Implementar rate limiting para prevenir abusos
+8. Configurar CORS adecuadamente si hay API
+
+================================================================================
+10. BIBLIOGRAFÍA
+================================================================================
+
+DOCUMENTACIÓN OFICIAL:
+----------------------
+• PHP Documentation. (2024). PHP: Hypertext Preprocessor. 
+  https://www.php.net/manual/es/
+
+• MySQL Documentation. (2024). MySQL 8.0 Reference Manual.
+  https://dev.mysql.com/doc/
+
+• PDO Documentation. (2024). PHP Data Objects.
+  https://www.php.net/manual/es/book.pdo.php
+
+LIBRERÍAS UTILIZADAS:
+---------------------
+• SweetAlert2. (2024). Beautiful alerts in JavaScript.
+  https://sweetalert2.github.io/
+
+• Chart.js. (2024). Simple yet flexible JavaScript charting.
+  https://www.chartjs.org/
+
+• TCPDF. (2024). PHP library for generating PDF documents.
+  https://tcpdf.org/
+
+• Google Fonts. (2024). Playfair Display & Poppins.
+  https://fonts.google.com/
+
+LIBROS Y RECURSOS:
+------------------
+• Duckett, J. (2014). HTML and CSS: Design and Build Websites. Wiley.
+
+• Duckett, J. (2014). JavaScript and JQuery: Interactive Front-End Web 
+  Development. Wiley.
+
+• Welling, L., & Thomson, L. (2017). PHP and MySQL Web Development. 
+  Sams Publishing.
+
+• Freeman, A., & Robson, E. (2020). Head First PHP & MySQL. O'Reilly Media.
+
+RECURSOS EN LÍNEA:
+------------------
+• MDN Web Docs. (2024). Mozilla Developer Network.
+  https://developer.mozilla.org/es/
+
+• W3Schools. (2024). Web Development Tutorials.
+  https://www.w3schools.com/
+
+• Stack Overflow. (2024). Community for developers.
+  https://stackoverflow.com/
+
+• GitHub. (2024). Platform for version control and collaboration.
+  https://github.com/
+
+================================================================================
+                              ANEXOS TÉCNICOS
+================================================================================
+
+ANEXO A: ESTRUCTURA DE ARCHIVOS DEL PROYECTO
+--------------------------------------------
+
+/workspace/
+├── config/
+│   └── database.php          # Conexión a base de datos
+├── sql/
+│   └── sistema_compras.sql   # Script de creación de BD
+├── styles/
+│   └── style.css             # Hoja de estilos principal
+├── imagenes/                  # Directorio para imágenes de productos
+├── vendor/                    # Dependencias de Composer (TCPDF)
+├── index.php                 # Página principal (tienda)
+├── login.php                 # Formulario de inicio de sesión
+├── login_process.php         # Proceso de autenticación
+├── register.php              # Formulario de registro
+├── register_process.php      # Proceso de registro
+├── logout.php                # Cierre de sesión
+├── carrito.php               # Carrito de compras
+├── checkout.php              # Proceso de pago
+├── perfil.php                # Perfil de usuario
+├── chat.php                  # Chat para clientes
+├── faq.php                   # Preguntas frecuentes
+├── terminos.php              # Términos y condiciones
+├── privacidad.php            # Política de privacidad
+├── admin.php                 # Panel de administrador
+├── admin_chat.php            # Chat para administradores
+├── inventario.php            # Gestión de productos
+├── ventas.php                # Gestión de ventas
+├── usuarios.php              # Gestión de usuarios
+├── reportes.php              # Reportes y estadísticas
+├── generar_factura.php       # Generación de factura PDF
+├── exportar_pdf.php          # Exportación de reportes PDF
+├── footer.php                # Pie de página común
+├── composer.json             # Configuración de Composer
+└── composer.lock             # Lock file de dependencias
+
+ANEXO B: DIAGRAMA DE FLUJO DEL PROCESO DE COMPRA
+------------------------------------------------
+
+1. Usuario navega por la tienda (index.php)
+           ↓
+2. Busca y filtra productos
+           ↓
+3. Agrega productos al carrito
+           ↓
+4. Revisa carrito (carrito.php)
+           ↓
+5. Proceder al checkout (checkout.php)
+           ↓
+6. Selecciona método de envío y pago
+           ↓
+7. Confirma compra
+           ↓
+8. Sistema actualiza stock
+           ↓
+9. Se registra venta en base de datos
+           ↓
+10. Se genera factura PDF
+           ↓
+11. Usuario recibe confirmación
+           ↓
+12. Administrador procesa pedido (ventas.php)
+           ↓
+13. Pedido cambia de estado hasta "Entregado"
+           ↓
+14. Usuario puede dejar reseña del producto
+
+ANEXO C: ESTADOS DEL CICLO DE VIDA DE UN PEDIDO
+-----------------------------------------------
+
+Estado 1: CONFIRMADO
+- Compra realizada exitosamente
+- Pago procesado
+- Inventario actualizado
+
+Estado 2: EN EMPAQUE
+- Personal preparando el pedido
+- Verificación de productos
+- Empaque adecuado
+
+Estado 3: EN TRANSPORTE
+- Pedido entregado a paquetería
+- En ruta hacia centro de distribución
+
+Estado 4: EN CAMINO
+- Pedido en reparto final
+- Próximo a ser entregado
+
+Estado 5: ENTREGADO
+- Pedido recibido por cliente
+- Transacción completada
+- Cliente puede dejar reseña
+
+ANEXO D: CRITERIOS DE ACEPTACIÓN DEL PROYECTO
+---------------------------------------------
+
+✓ El sistema permite registro e inicio de sesión de usuarios
+✓ Los clientes pueden navegar y buscar productos
+✓ El carrito de compras funciona correctamente
+✓ El proceso de checkout completa la compra
+✓ Los administradores pueden gestionar inventario
+✓ Las ventas quedan registradas en la base de datos
+✓ El seguimiento de pedidos muestra estados correctos
+✓ El chat permite comunicación entre cliente y admin
+✓ Las facturas PDF se generan correctamente
+✓ Los reportes muestran información precisa
+✓ La interfaz es responsiva y usable en móviles
+✓ El sistema previene accesos no autorizados
+
+================================================================================
+                            INFORMACIÓN DEL AUTOR
+================================================================================
+
+Proyecto: Sistema de Comercio Electrónico "Mi Tortuga"
+Tipo: Aplicación Web de E-commerce
+Lenguaje: PHP 8.2
+Base de Datos: MySQL/MariaDB
+Diseño: CSS3 Moderno con animaciones
+Librerías: TCPDF, SweetAlert2, Chart.js
+
+Características destacadas del proyecto:
+• Código limpio y organizado
+• Interfaz moderna y elegante
+• Funcionalidades completas de e-commerce
+• Seguridad básica implementada
+• Documentación incluida
+• Fácil de instalar y configurar
+
+Requisitos mínimos de instalación:
+• PHP 8.0 o superior
+• MySQL 5.7 o superior / MariaDB 10.3+
+• Servidor web (Apache/Nginx)
+• Extensión PDO habilitada
+• Composer (para dependencias)
+
+================================================================================
+                               FIN DEL DOCUMENTO
+================================================================================
+
+Documento generado para fines académicos y de documentación del proyecto.
+Este trabajo escrito describe completamente el sistema desarrollado y sirve
+como guía tanto para usuarios finales como para desarrolladores que den
+mantenimiento al proyecto.
+
+Fecha de elaboración: 2026
+Versión del documento: 1.0
+
+================================================================================
